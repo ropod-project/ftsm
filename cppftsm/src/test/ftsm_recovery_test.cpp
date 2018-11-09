@@ -1,4 +1,4 @@
-#include "ftsm_base.h"
+#include "ftsm.h"
 
 #include <csignal>
 #include <string>
@@ -8,11 +8,11 @@
 
 namespace ftsm_tests
 {
-    class RecoverableComponent : public ftsm::FTSMBase
+    class RecoverableComponent : public ftsm::FTSM
     {
     public:
         RecoverableComponent(std::string name, std::vector<std::string> dependencies, int max_recovery_attempts=1)
-         : ftsm::FTSMBase(name, dependencies, max_recovery_attempts) { }
+         : ftsm::FTSM(name, dependencies, max_recovery_attempts) { }
 
         virtual std::string init()
         {

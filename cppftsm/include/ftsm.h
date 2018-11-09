@@ -64,10 +64,10 @@ namespace ftsm
      * @maintainer Alex Mitrevski, Santosh Thoduka, Argentina Ortega Sainz
      * @contact aleksandar.mitrevski@h-brs.de, santosh.thoduka@h-brs.de, argentina.ortega@h-brs.de
      */
-    class FTSMBase
+    class FTSM
     {
     public:
-        FTSMBase(std::string name, std::vector<std::string> dependencies, int max_recovery_attempts=1);
+        FTSM(std::string name, std::vector<std::string> dependencies, int max_recovery_attempts=1);
 
         /**
          * Starts the state machine on a background thread

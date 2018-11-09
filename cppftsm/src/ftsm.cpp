@@ -1,4 +1,4 @@
-#include "ftsm_base.h"
+#include "ftsm.h"
 
 namespace ftsm
 {
@@ -39,7 +39,7 @@ namespace ftsm
     /////////////////////////////
     // Transition map definition
     /////////////////////////////
-    std::map<std::string, std::map<std::string, std::string>> FTSMBase::transition_map =
+    std::map<std::string, std::map<std::string, std::string>> FTSM::transition_map =
     {
         {FTSMStates::INITIALISING,
             {
@@ -80,9 +80,9 @@ namespace ftsm
 
 
     ///////////////////////////////
-    // FTSMBase method definitions
+    // FTSM method definitions
     ///////////////////////////////
-    FTSMBase::FTSMBase(std::string name, std::vector<std::string> dependencies, int max_recovery_attempts)
+    FTSM::FTSM(std::string name, std::vector<std::string> dependencies, int max_recovery_attempts)
         : current_state(FTSMStates::START)
     {
         this->name = name;
@@ -96,13 +96,13 @@ namespace ftsm
     /**
      * Starts the state machine on a background thread
      */
-    void FTSMBase::run()
+    void FTSM::run()
     {
         if (!this->is_alive)
         {
             this->current_state = FTSMStates::INITIALISING;
             this->is_alive = true;
-            this->sm_thread = std::thread(&FTSMBase::__manage_sm, this);
+            this->sm_thread = std::thread(&FTSM::__manage_sm, this);
         }
         else
         {
@@ -113,7 +113,7 @@ namespace ftsm
     /**
      * Stops the state machine
      */
-    void FTSMBase::stop()
+    void FTSM::stop()
     {
         if (this->is_alive)
         {
@@ -130,7 +130,7 @@ namespace ftsm
     /**
      * Performs component initialisation; calls the virtual this->init method and returns a transition constant
      */
-    std::string FTSMBase::__init()
+    std::string FTSM::__init()
     {
         std::string result = this->init();
         return result;
@@ -139,7 +139,7 @@ namespace ftsm
     /**
      * Performs component configuration; calls the virtual this->configuring method and returns a transition constant
      */
-    std::string FTSMBase::__configuring()
+    std::string FTSM::__configuring()
     {
         int attempt_counter = 0;
         std::string result = "";
@@ -170,7 +170,7 @@ namespace ftsm
     /**
      * Indicates component readiness; calls the virtual this->ready method and returns a transition constant when an operation request is received
      */
-    std::string FTSMBase::__ready()
+    std::string FTSM::__ready()
     {
         std::string result = this->ready();
         return result;
@@ -179,7 +179,7 @@ namespace ftsm
     /**
      * Performs component operation; calls the virtual this->running method and returns a transition constant
      */
-    std::string FTSMBase::__running()
+    std::string FTSM::__running()
     {
         std::string result = this->running();
         return result;
@@ -188,7 +188,7 @@ namespace ftsm
     /**
      * Performs component recovery; calls the virtual this->recovering method and returns a transition constant
      */
-    std::string FTSMBase::__recovering()
+    std::string FTSM::__recovering()
     {
         int attempt_counter = 0;
         std::string result = "";
@@ -211,7 +211,7 @@ namespace ftsm
      * Manages the operation of the state machine by calling the appropriate state methods and
      * performing state machine transitions based on the results of the states
      */
-    void FTSMBase::__manage_sm()
+    void FTSM::__manage_sm()
     {
         std::string transition_constant = "";
         while (this->current_state != FTSMStates::STOPPED and this->is_running)
@@ -251,9 +251,9 @@ namespace ftsm
      *
      * @param transition an FTSMTransitions constant indicating the transition that should be taken
      */
-    void FTSMBase::__transition(std::string transition)
+    void FTSM::__transition(std::string transition)
     {
-        std::string new_state = FTSMBase::transition_map[current_state][transition];
+        std::string new_state = FTSM::transition_map[current_state][transition];
         if (new_state == "")
         {
             new_state = this->previous_state;

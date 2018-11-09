@@ -1,7 +1,7 @@
 import time
-from pyftsm.ftsm_base import FTSMBase, FTSMTransitions
+from pyftsm.ftsm import FTSM, FTSMTransitions
 
-class Component(FTSMBase):
+class Component(FTSM):
     def __init__(self, name, dependencies, max_recovery_attempts=1):
         super(Component, self).__init__(name, dependencies, max_recovery_attempts)
 

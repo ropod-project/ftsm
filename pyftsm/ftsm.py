@@ -44,7 +44,7 @@ class FTSMTransitions(object):
     DONE_RECOVERING = 'recovery_successful'
     FAILED_RECOVERY = 'failed_recovery'
 
-class FTSMBase(object):
+class FTSM(object):
     '''Base class of a fault-tolerant state machine
 
     @author Alex Mitrevski
