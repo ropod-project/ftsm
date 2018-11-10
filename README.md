@@ -6,7 +6,7 @@ FTSM implements an interface of a state machine for implementing fault-tolerant 
 
 ![Fault-tolerant state machine](docs/figures/fault_tolerant_state_machine.png)
 
-We currently provide implementations in both C++ and Python. The C++ implementation - `cppftsm` - includes a header and a source file as well as simple of the functionality of the state machine; the Python implementation is in a standalone package - `pyftsm` - in a single script `ftsm_base.py` and also includes simple tests of the state machine's functionality.
+We currently provide implementations in both C++ and Python. The C++ implementation - `cppftsm` - includes a header and a source file as well as simple tests of the functionality of the state machine; the Python implementation is in a standalone package - `pyftsm` - in a single script `ftsm_base.py` and also includes simple tests of the state machine's functionality.
 
 ## Exposed methods
 
