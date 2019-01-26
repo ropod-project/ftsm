@@ -250,7 +250,9 @@ class FTSM(object):
             new_state = self.previous_state
 
         if new_state != self.current_state:
-            print('State machine transitioning: {0} -> {1}'.format(self.current_state, new_state))
+            print('[{0}] State machine transitioning: {1} -> {2}'.format(self.name,
+                                                                         self.current_state,
+                                                                         new_state))
 
         self.previous_state = self.current_state
         self.current_state = new_state
