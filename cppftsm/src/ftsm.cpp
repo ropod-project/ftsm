@@ -59,7 +59,8 @@ namespace ftsm
             {
                 {FTSMTransitions::RUN, FTSMStates::RUNNING},
                 {FTSMTransitions::WAIT, FTSMStates::READY},
-                {FTSMTransitions::RECONFIGURE, FTSMStates::CONFIGURING}
+                {FTSMTransitions::RECONFIGURE, FTSMStates::CONFIGURING},
+                {FTSMTransitions::RECOVER, FTSMStates::RECOVERING}
             }
         },
         {FTSMStates::RUNNING,
